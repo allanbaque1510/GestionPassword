@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import imgCerdito from '../img/cerdito.gif'
 import { useForm } from 'react-hook-form'
+import { useAuth } from '../context/AuthContext';
 const Login = () => {
   const classInputs = 'w-full  inputForm px-4 py-2 rounded-md my-2';
   const {register, handleSubmit, formState:{errors}} = useForm()
+  const {signin,isAuthenticated, errors:AuthErrors}=useAuth();
+  const navigate = useNavigate()
   const onSubmit = handleSubmit(async(values)=>{
-      singup(values);
+    signin(values);
   })
+  
+  useEffect(()=>{
+    if(isAuthenticated) navigate('/')
+  },[isAuthenticated])
+
   return (
     <div className='flex h-screen items-center justify-center'>
       <div className='back-boxForm max-w-md p-10 rounded-md'>
@@ -15,6 +24,11 @@ const Login = () => {
       <div className="contImg">
         <img src={imgCerdito} className='imgCerdito'/>
       </div>
+      {AuthErrors.map((error,i)=>(
+        <div className="boxMessageError" key={i}>
+          {error}
+        </div>
+      ))}
       <form  
         onSubmit={onSubmit} 
         >
@@ -36,6 +50,9 @@ const Login = () => {
        
         <button type="submit">Entrar</button>
       </form>
+      <p className='flex gap-x-2 justify-center'>
+        ¿No tienes una cuenta? <Link to='/registro' className='underline' >Crea una aqui</Link>
+      </p>
       </div>
 
     </div>

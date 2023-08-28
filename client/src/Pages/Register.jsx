@@ -1,7 +1,7 @@
 import React, { useEffect ,useState} from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import imgCerdito from '../img/cerdito.gif'
 
 const Register = () => {
@@ -16,7 +16,6 @@ const Register = () => {
   },[isAuthenticated])
 
   const onSubmit = handleSubmit(async(values)=>{
-    
     if(values.password == values.password1){
       setPassVerify(true)
       singup(values);
@@ -79,6 +78,9 @@ const Register = () => {
 
         <button type="submit">Registrar</button>
       </form>
+      <p className='flex gap-x-2 justify-center'>
+        ¿Ya tienes una cuenta? <Link to='/login' className='underline' >Ingresa aqui</Link>
+      </p>
     </div>
     </div>
 
