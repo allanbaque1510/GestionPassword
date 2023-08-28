@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  background-color: #ffd4f1;
+  color: rgb(95, 66, 95);
+}
+.boxMessageError{
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  background: rgb(139, 76, 134);
+  border-radius: 10px;
+  text-align: center;
+  padding-block: 8px;
+}
+.boxMessage{
+  color: #441e49;
+  font-style: oblique;
+  border-radius: 5px;
+  text-align: center;
+}
+.back-boxForm{
+  background-color: #f7b7f7;
+}
+.inputForm{
+  color: rgb(102, 77, 94);
+  background-color: #ffffff;
+}
+.imgCerdito{
+  
+  width: 150px;
+  height: 140px;
+}
+.contImg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
