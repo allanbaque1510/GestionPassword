@@ -8,13 +8,17 @@ const  passwSchema = new  mongoose.Schema({
     },
     user:{
         type:String,
-        required:true,
+        required:false,
         trim:true
     },
     email:{
         type:String,
-        required:true,
+        required:false,
         trim:true,
+    },
+    nameApp:{
+        type:String,
+        required:false,
     },
     password:{
         type:String,
@@ -22,7 +26,7 @@ const  passwSchema = new  mongoose.Schema({
     },
     site:{
         type:String,
-        required:true,
+        required:false,
         trim:true,
     },
     status:{

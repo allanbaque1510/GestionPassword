@@ -9,12 +9,13 @@ export const getAllPasswords = async(req,res)=>{
 }
 
 export const createPassword = async(req,res)=>{
-    const {user,email,password,site} = req.body;
+    const {user,email,password,site,nameApp} = req.body;
     const newData = new Pass({
         user,
         user_id:req.user.id,
         email,
         password,
+        nameApp,
         site,
         status:1
     })

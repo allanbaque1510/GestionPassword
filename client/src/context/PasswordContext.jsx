@@ -13,17 +13,21 @@ export const usePassContext = ()=>{
 
 export function PassProvider({children}){
     const [objPasswords, setObjPasswords] = useState([])
+    const [objPassword, setObjPassword] = useState([])
     const viewAllPass = async()=>{
         const res = await getAllObjects();
-        console.log(res)
+        setObjPasswords(res.data)
+        console.log(res.data)
     } 
     const createNewObjPass = async(data)=>{
-        createObject(data)
+       const res = await createObject(data)
+       setObjPassword(res.data)
     }
     return(
         <passContext.Provider value={{
             createNewObjPass,
             viewAllPass,
+            objPassword,
             objPasswords,
         }}>
             {children}

@@ -10,7 +10,7 @@ import { FaHouseChimney} from "react-icons/fa6";
 import menuIcon from '../img/menu.png'
 const Index = () => {
   const [isOpen, setIsOpen] = useState(true)
-  const [indexMenu, setIndexMenu] = useState(null)
+  const [indexMenu, setIndexMenu] = useState(0)
   const {user} = useAuth()
   const LogOut = () =>{
     console.log('Cerrada la sesion')
@@ -22,7 +22,6 @@ const Index = () => {
     {title: "Configuracion",icon:FiSettings, component:Configuracion},
     {title: "Salir",icon:FiLogOut, action:LogOut },
   ]
-  console.log(user.username)
   return (
      <div className='flex'>
         <div className={`${isOpen? 'w-72':'w-20'} 

@@ -57,7 +57,6 @@ export const AuthProvider = ({children}) => {
             if(cookie.token){
                 try {
                     const res = await verifyToken(cookie.token)
-                    console.log(res)
                     if(!res.data){
                         setIsAuthenticated(false)
                         setLoading(false)
