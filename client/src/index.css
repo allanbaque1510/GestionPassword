@@ -39,3 +39,8 @@ body{
   align-items: center;
   width: 100%;
 }
+.labelPass{
+  font-weight: 500;
+  color: #94218e;
+  padding-right: 5px;
+}

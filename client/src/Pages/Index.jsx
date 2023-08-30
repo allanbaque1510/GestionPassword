@@ -24,9 +24,9 @@ const Index = () => {
   ]
   return (
      <div className='flex'>
-        <div className={`${isOpen? 'w-72':'w-20'} 
+        <div className={`${isOpen? 'w-72':'w-14'} 
           duration-300 h-screen bg-pink-900 relative
-          p-5 pt-8`}>
+          p-2 pt-8`}>
           <img 
             src={menuIcon}  
             alt="" 
