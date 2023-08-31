@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <div className='flex h-screen items-center justify-center'>
-      <div className='back-boxForm max-w-md p-10 rounded-md'>
+      <div className=' bg-pink-200 max-w-md p-10 rounded-md'>
 
       <h1 className='text-2xl font-bold text-center'>Iniciar Sesion</h1>
       <div className="contImg">
@@ -47,8 +47,9 @@ const Login = () => {
         <div className="boxMessage">
           {errors.password && <p>Contraseña es requerido</p> }
         </div>
-       
-        <button type="submit">Entrar</button>
+       <div className="flex justify-center my-2">
+        <button type="submit" className='py-1 px-10 font-bold text-lg text-white  rounded-xl  bg-pink-900'>Entrar</button>
+       </div>
       </form>
       <p className='flex gap-x-2 justify-center'>
         ¿No tienes una cuenta? <Link to='/registro' className='underline' >Crea una aqui</Link>

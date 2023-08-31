@@ -26,7 +26,7 @@ const Register = () => {
     return (
       <div className='flex h-screen items-center justify-center'>
 
-    <div className='back-boxForm max-w-md p-10 rounded-md'>
+    <div className='bg-pink-200 max-w-md p-10 rounded-md'>
     <h1 className='text-2xl font-bold text-center'>Registro</h1>
       <div className="contImg">
 
@@ -48,8 +48,8 @@ const Register = () => {
         onSubmit={onSubmit} 
         >
         
-        <label htmlFor="username">Nombre de usuario:</label>
-        <input type="text" {...register('username',{required:true})} className={classInputs} placeholder='Nombre de usuario' autoComplete="off"/>
+        <label htmlFor="firstName">Nombre de usuario:</label>
+        <input type="text" {...register('firstName',{required:true})} className={classInputs} placeholder='Nombre de usuario' autoComplete="off"/>
         
         <div className="boxMessage">
           {errors.username && <p>Nombre de usuario es requerido</p> }
@@ -75,8 +75,9 @@ const Register = () => {
         <div className="boxMessage">
           {errors.password1 && <p>Repetir contraseña es requerido</p> }
         </div>
-
-        <button type="submit">Registrar</button>
+        <div className="flex justify-center my-2"> 
+          <button type="submit" className='py-1 px-10 font-bold text-lg text-white  rounded-xl  bg-pink-900'>Registrar</button>
+        </div>
       </form>
       <p className='flex gap-x-2 justify-center'>
         ¿Ya tienes una cuenta? <Link to='/login' className='underline' >Ingresa aqui</Link>

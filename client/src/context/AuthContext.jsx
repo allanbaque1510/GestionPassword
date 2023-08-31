@@ -16,6 +16,7 @@ export const AuthProvider = ({children}) => {
     const [errors,setErrors] = useState([])
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [loading, setLoading] = useState(true)
+    
     const singup = async(user) =>{
         try {
             const res = await registerRequest(user);
@@ -36,11 +37,20 @@ export const AuthProvider = ({children}) => {
             
 
         } catch (error) {
-            console.log(error.response)
-            setErrors(error.response.data)
+            console.log(error)
+            if(error.response.data){
+                return setErrors(error.response.data)
+            }
+            if(error.message){
+                return setErrors([error.message])
+            }
         }
     }
-
+    const logOut= () =>{
+        Cookies.remove("token");
+        setUser(null)
+        setIsAuthenticated(false)
+    }
     useEffect(() => {
       if(errors.length >0){
         const timer = setTimeout(() => {
@@ -89,6 +99,7 @@ export const AuthProvider = ({children}) => {
         <AuthContext.Provider value={{
             singup,
             signin,
+            logOut,
             loading,
             user,
             isAuthenticated,

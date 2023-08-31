@@ -6,14 +6,14 @@ import { TOKEN_SECRET } from "../config.js";
 
 export const register = async(req,res)=>{
    
-    const {email,password,username}=req.body
+    const {email,password,firstName}=req.body
     
     try {
         const userFound = await User.findOne({email})
         if(userFound) return res.status(400).json(['El usuario ya se encuentra registrado'])
         const passwordEncrypt = await bcrypt.hash(password,10)
         const newUser = new User({
-            username,
+            username:firstName,
             email,
             password:passwordEncrypt,
         })

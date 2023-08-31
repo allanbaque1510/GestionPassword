@@ -6,7 +6,7 @@ import { usePassContext } from '../context/PasswordContext';
 const FormAddPassw = ({cerrarForm}) => {
     const classInputs = 'w-full  inputForm px-4 py-2 rounded-md my-2';
     const botonesForm = 'my-2 mx-10 bg-pink-800 text-white text-xl py-2 px-4  rounded-full'
-    const {register, handleSubmit, formState:{errors}} = useForm()
+    const {register, handleSubmit, reset,formState:{errors}} = useForm()
     
     const {user} = useAuth()
     const {createNewObjPass}= usePassContext()
@@ -15,6 +15,13 @@ const FormAddPassw = ({cerrarForm}) => {
     }
     const onSubmit = handleSubmit(async(values)=>{
         createNewObjPass(values)
+        reset({
+            user:"",
+            site:"",
+            nameApp:"",
+            email:"",
+            password:""
+        })
       })
   return (
     <div className='p-3'>

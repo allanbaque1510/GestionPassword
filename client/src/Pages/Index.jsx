@@ -11,16 +11,14 @@ import menuIcon from '../img/menu.png'
 const Index = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [indexMenu, setIndexMenu] = useState(0)
-  const {user} = useAuth()
-  const LogOut = () =>{
-    console.log('Cerrada la sesion')
-  } 
+  const {user,logOut} = useAuth()
+
   const opciones = [
     {title: "Inicio", icon:FaHouseChimney, component:Inicio},
     {title: "Gestionar",icon:FaChartBar, component:Gestionar},
     {title: "Perfil",icon:FaUser, component:Perfil},
     {title: "Configuracion",icon:FiSettings, component:Configuracion},
-    {title: "Salir",icon:FiLogOut, action:LogOut },
+    {title: "Salir",icon:FiLogOut, action:logOut },
   ]
   return (
      <div className='flex'>
@@ -45,7 +43,7 @@ const Index = () => {
           <ul className='pt-6'>
             {opciones.map((menu,index)=>(
               <li key={index} 
-                onClick={()=>{setIndexMenu(index); console.log(index)}}              
+                onClick={()=>{setIndexMenu(index)}}              
                 className={`text-pink-200 text-sm  rounded-xl flex items-center
                gap-x-4 cursor-pointer p-2 mb-4 hover:bg-pink-700 ${indexMenu === index?'bg-pink-600':null}` }>
                 <div>{React.createElement(menu?.icon, { size: "20" })}</div>

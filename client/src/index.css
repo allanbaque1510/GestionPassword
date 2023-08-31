@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 body{
-  background-color: #ffd4f1;
+  background-color: #fde0f3;
   color: rgb(95, 66, 95);
 }
 .boxMessageError{
@@ -10,7 +10,7 @@ body{
   font-weight: 500;
   font-size: 18px;
   color: #ffffff;
-  background: rgb(139, 76, 134);
+  background: rgb(151, 99, 147);
   border-radius: 10px;
   text-align: center;
   padding-block: 8px;
@@ -18,8 +18,28 @@ body{
 .boxMessage{
   color: #441e49;
   font-style: oblique;
+  font-weight: 500;
   border-radius: 5px;
   text-align: center;
+  text-decoration:underline;
+}
+body::-webkit-scrollbar{
+  background: transparent;
+  height: 10px;
+  width: 5px;
+}
+body::-webkit-scrollbar-thumb{
+  background: #e79fd3;
+  border-radius: 50px;
+}
+.scrollBar::-webkit-scrollbar{
+  background: transparent;
+  height: 10px;
+  width: 5px;
+}
+.scrollBar::-webkit-scrollbar-thumb{
+  background: #e79fd3;
+  border-radius: 50px;
 }
 .back-boxForm{
   background-color: #f7b7f7;
