@@ -24,7 +24,7 @@ const Gestionar = () => {
       email: ''
     })
   }
-  const {viewAllPass,objPasswords,deleteObj,borrarPass,updateObj,objPassword}= usePassContext();   
+  const {viewAllPass,objPasswords,deleteObj,borrarPass,updateObj,objPassword,cargando}= usePassContext();   
   const borrarDato=(dato)=>{
     Swal.fire({
       title: 'Eliminar dato',
@@ -41,6 +41,27 @@ const Gestionar = () => {
     }) 
     
   } 
+  useEffect(() => {
+    if(cargando){
+      Swal.fire({
+          title: 'Espere!',
+          html: 'Actualizando datos',
+          allowOutsideClick:false,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+    }
+  }, [cargando])
+
   useEffect(() => {
     viewAllPass()
   }, [borrarPass,objPassword])
@@ -78,7 +99,7 @@ const Gestionar = () => {
     )
   );
   return (
-    <div className='scrollBar bg-pink-100 h-screen rounded-xl py-3 overflow-auto'>
+    <div className='scrollBar bg-pink-100 h-screen rounded-xl py-3 overflow-hidden'>
       <h1 className='text-center m-4 text-3xl font-bold'>Gestionar credenciales</h1>
       <input type="search" placeholder=' Filtrar datos'
         className='h-9  mx-4 text-lg border-pink-500 border-2 rounded outline-none' 
@@ -86,16 +107,16 @@ const Gestionar = () => {
         onChange={(e)=>setValSearch(e.target.value)} 
         />
         <hr className=" h-1 rounded-full my-3 mx-2 bg-gray-200 border-0 dark:bg-pink-900"/>
-      <div className="flex flex-col items-center scrollBar">
-        <table className='border-collapse border mx-2  border-pink-900 '>
-          <thead>
+      <div className="flex flex-col h-3/4 items-center scrollBar overflow-auto">
+        <table className='border-collapse border mx-2   border-pink-900 '>
+          <thead className='sticky top-0 z-10'>
             <tr>
-              <th className='border border-pink-900  text-white bg-pink-900'>App</th>
-              <th className='border border-pink-900 text-white bg-pink-900'>Usuario</th>
-              <th className='border border-pink-900 text-white bg-pink-900'>Email</th>
-              <th className='border border-pink-900 text-white bg-pink-900'>Url</th>
-              <th className='border border-pink-900 text-white bg-pink-900'>Contraseña</th>
-              <th className='border border-pink-900 text-white bg-pink-900'>Acciones</th>
+              <th className='border-2 rounded-lg   text-white bg-pink-900'>App</th>
+              <th className='border-2 rounded-lg  text-white bg-pink-900'>Usuario</th>
+              <th className='border-2 rounded-lg  text-white bg-pink-900'>Email</th>
+              <th className='border-2 rounded-lg  text-white bg-pink-900'>Url</th>
+              <th className='border-2 rounded-lg  text-white bg-pink-900'>Contraseña</th>
+              <th className='border-2 rounded-lg  text-white bg-pink-900'>Acciones</th>
               
             </tr>
           </thead>
@@ -123,7 +144,7 @@ const Gestionar = () => {
                 </td>
 
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white' >
-                  <input className=' border-pink-400 border-2 rounded w-24' type="text" name='password'  value={formData.password} onChange={cambiarValores}/>
+                  <input className=' border-pink-400 border-2 rounded w-24' type="text" name='password' required='true'  value={formData.password} onChange={cambiarValores}/>
                 </td>
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white text-center' >
                   <button className='p-1 px-3 mx-2 rounded-xl my-1 bg-blue-600 border-blue-600 border-2 font-semibold hover:bg-blue-700 text-white' onClick={enviarDatosMod} >Guardar</button>

@@ -19,8 +19,8 @@ export const getAllPasswords = async(req,res)=>{
 export const createPassword = async(req,res)=>{
     const cryptr = new Cryptr('CodeSecretAllanXd@123');
 
-    const {user,email,password,site,nameApp} = req.body;
-    const imagen =await busqueda(nameApp)
+    const {user,email,password,site,Aplicacion} = req.body;
+    const imagen =await busqueda(Aplicacion)
     
     const passEncrypt = cryptr.encrypt(password)
     const userEncrypt = cryptr.encrypt(user)
@@ -31,7 +31,7 @@ export const createPassword = async(req,res)=>{
         user_id:req.user.id,
         email:emailEncrypt,
         password:passEncrypt,
-        nameApp,
+        nameApp:Aplicacion,
         site,
         imagen:imagen,
         status:1
@@ -54,10 +54,26 @@ export const deletePassword = async(req,res)=>{
     res.sendStatus(204)
 }
 export const updatePassword = async(req,res)=>{
+    const cryptr = new Cryptr('CodeSecretAllanXd@123');
+    const {user,email,password,site,nameApp} = req.body;
+    const imagen =await busqueda(nameApp)
+    
+    const passEncrypt = cryptr.encrypt(password)
+    const userEncrypt = cryptr.encrypt(user)
+    const emailEncrypt = cryptr.encrypt(email)
+
+    const dataEncrypt = ({
+        user:userEncrypt,
+        email:emailEncrypt,
+        password:passEncrypt,
+        nameApp,
+        site,
+        imagen:imagen,
+    })
     const data1 = await Pass.findOne({_id:req.params.id, status:1})
     if(!data1) return res.status(401).json({message:'No se encontro la contraseña'})
 
-    const data = await Pass.findByIdAndUpdate(req.params.id, req.body,{new:true})
+    const data = await Pass.findByIdAndUpdate(req.params.id, dataEncrypt,{new:true})
     
     if(!data) return res.status(400).json({message:'No se encontro contraseña'})
     res.json(data)

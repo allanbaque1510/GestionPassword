@@ -10,9 +10,9 @@ export const busqueda=async(req)=>{
     await page.click('button.Tg7LZd')
     await page.waitForSelector('img.rg_i.Q4LuWd');
     await page.click('img.rg_i.Q4LuWd')
-    await page.waitForSelector('img.r48jcc.pT0Scc.iPVvYb');
+    await page.waitForSelector('img.r48jcc.pT0Scc');
     const result = await page.evaluate(()=>{
-        const data =  document.querySelector('img.r48jcc.pT0Scc.iPVvYb');
+        const data =  document.querySelector('img.r48jcc.pT0Scc');
         const url = data.getAttribute('src')
         return url
     })

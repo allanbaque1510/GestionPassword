@@ -3,7 +3,7 @@ import {authRequire} from '../middlewares/validateToken.js'
 import {createPassword,getAllPasswords,getPassword,updatePassword,deletePassword} from "../controllers/gestion.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { createSchema, updateSchema } from "../schemas/Passw.schema.js";
-import {busqueda} from "../libs/scrapping.js";
+
 const router = Router();
 
 router.get('/gestion', authRequire, getAllPasswords);

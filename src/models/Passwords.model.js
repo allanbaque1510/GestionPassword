@@ -18,7 +18,7 @@ const  passwSchema = new  mongoose.Schema({
     },
     nameApp:{
         type:String,
-        required:false,
+        required:true,
     },
     password:{
         type:String,

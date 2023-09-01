@@ -63,7 +63,9 @@ export function PassProvider({children}){
     }
     const updateObj = async(data)=>{
         try {
+            setCargando(true)
             const res = await modifyObject(data)
+            setCargando(false)
             setObjPassword(res.data)
             Swal.fire({
                 icon: 'success',

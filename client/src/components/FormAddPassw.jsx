@@ -76,8 +76,8 @@ const FormAddPassw = ({cerrarForm}) => {
             <label htmlFor="site">URL:</label>
             <input type="text" {...register('site',{required:false})} className={classInputs} placeholder='Url de la pagina'/>
             
-             <label htmlFor="nameApp">Nombre de la pagina o aplicacion:</label>
-            <input type="text" {...register('nameApp',{required:true})} className={classInputs} placeholder='Nombre de la pagina o aplicacion'/>
+             <label htmlFor="Aplicacion">Nombre de la pagina o aplicacion:</label>
+            <input type="text" {...register('Aplicacion',{required:true})} className={classInputs} placeholder='Nombre de la pagina o aplicacion'/>
             <div className="boxMessage">
             {errors.nameApp && <p>Nombre de aplicacion requerido</p> }
             </div>
