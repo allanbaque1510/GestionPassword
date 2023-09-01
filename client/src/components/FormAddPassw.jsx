@@ -1,18 +1,58 @@
-import React from 'react'
-import { useAuth } from '../context/AuthContext'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { usePassContext } from '../context/PasswordContext';
+import Swal from 'sweetalert2';
 
 const FormAddPassw = ({cerrarForm}) => {
     const classInputs = 'w-full  inputForm px-4 py-2 rounded-md my-2';
     const botonesForm = 'my-2 mx-10 bg-pink-800 text-white text-xl py-2 px-4  rounded-full'
     const {register, handleSubmit, reset,formState:{errors}} = useForm()
     
-    const {user} = useAuth()
-    const {createNewObjPass}= usePassContext()
+    const generarContraseña=()=> {
+      const inputPassword = document.getElementById('password');
+      const caracteres = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?';
+      let contrasena = '';
+    
+      for (let i = 0; i < 12; i++) {
+        const caracterAleatorio = caracteres[Math.floor(Math.random() * caracteres.length)];
+        contrasena += caracterAleatorio;
+      }
+    
+      inputPassword.value=contrasena;
+    }
+
+    const {createNewObjPass,cargando}= usePassContext()
     const cerrarFormulario = () =>{
         cerrarForm(false);
+        reset({
+          user:"",
+          site:"",
+          nameApp:"",
+          email:"",
+          password:""
+      })
     }
+    useEffect(() => {
+      if(cargando){
+        Swal.fire({
+            title: 'Espere!',
+            html: 'Cargando datos',
+            allowOutsideClick:false,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+          }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+      }
+    }, [cargando])
+    
     const onSubmit = handleSubmit(async(values)=>{
         createNewObjPass(values)
         reset({
@@ -37,15 +77,21 @@ const FormAddPassw = ({cerrarForm}) => {
             <input type="text" {...register('site',{required:false})} className={classInputs} placeholder='Url de la pagina'/>
             
              <label htmlFor="nameApp">Nombre de la pagina o aplicacion:</label>
-            <input type="text" {...register('nameApp',{required:false})} className={classInputs} placeholder='Nombre de la pagina o aplicacion'/>
-            
+            <input type="text" {...register('nameApp',{required:true})} className={classInputs} placeholder='Nombre de la pagina o aplicacion'/>
+            <div className="boxMessage">
+            {errors.nameApp && <p>Nombre de aplicacion requerido</p> }
+            </div>
 
             <label htmlFor="email">Corre electronico:</label>
             <input type="email" {...register('email',{required:false})} className={classInputs} placeholder='Correo electronico'/>
    
             
             <label htmlFor="password">Contraseña:</label>
-            <input type="text" {...register('password',{required:true})} className={classInputs} placeholder='Contraseña'/>
+            <div className="flex flex-row">
+              <input type="text" {...register('password',{required:true})} id='password' className={classInputs} placeholder='Contraseña'/>
+              <button type='button' className='duration-200 bg-white text-pink-700 font-bold my-auto p-2 ml-4 border-2 border-pink-700 rounded-xl 
+              hover:bg-pink-700 hover:text-white' onClick={generarContraseña}>Generar</button>
+            </div>
             
             <div className="boxMessage">
             {errors.password && <p>Contraseña es requerido</p> }

@@ -10,7 +10,7 @@ const Inicio = () => {
   const [openForm, setOpenForm] = useState(false)
   const [items, setItems] = useState([]);
   const [valSearch, setValSearch] = useState('');
-
+  
     const {viewAllPass,objPasswords,objPassword}= usePassContext();   
     const {user} = useAuth()
 
@@ -86,10 +86,18 @@ const Inicio = () => {
                
                <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {(valSearch.length>0?filteredData:objPasswords).map((pass,index)=>(
-                  <li className=' scrollBar bg-white m-2 rounded-xl max-w-lg p-2 flex flex-col overflow-auto ' key={index}>
-                    <table className='table-fixed mb-2'>
+                  <li className=' scrollBar bg-white mx-2 my-4 rounded-xl max-w-lg flex flex-col ' key={index}>
+                      <div className="bg-pink-700 flex flex-col items-center rounded-t-xl">
+                        <img className=' bg-white p-1 rounded-full w-16 h-16 -mt-4 border-4 border-pink-700' src={pass.imagen} alt="" />
+                        <span className='text-white font-bold'>
+                          {pass.nameApp}
+
+                        </span>
+                      </div>
+                      <div className=" overflow-auto scrollBar">
+
+                    <table className='table-fixed mb-2 m-2'>
                       <tbody>
-                      {pass.nameApp.length > 0?<tr className=''><td className='labelPass'>Aplicacion: </td><td className='break-words'>{pass.nameApp}</td></tr>: null } 
                       {pass.email.length > 0?<tr className=''><td className='labelPass'>Correo: </td><td className='break-words'>{pass.email}</td></tr>: null } 
                       {pass.user.length > 0?<tr className=''><td className='labelPass'>Usuario: </td><td className='break-words'>{pass.user}</td></tr>: null } 
                       {pass.site.length > 0?<tr className=''><td className='labelPass'>URL: </td><td><a href={pass.site.includes('https')?pass.site:"https://"+pass.site}  rel="noopener noreferrer" className=' px-1 p-0.5 font-semibold text-pink-500 rounded underline' target='_blank'>Visitar pagina</a></td></tr>: null } 
@@ -102,6 +110,7 @@ const Inicio = () => {
                    
                         </tbody>
                       </table>
+                      </div>
 
                       <span className=' flex-1 flex justify-center flex-row'>
                         <button 

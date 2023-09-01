@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { usePassContext } from '../context/PasswordContext';
 import Swal from 'sweetalert2'
-
+import { FaRegEdit,FaRegTrashAlt} from "react-icons/fa";
 const Gestionar = () => {
   const [valSearch, setValSearch] = useState('')
   const [idPass, setIdPass] = useState('')
@@ -86,7 +86,7 @@ const Gestionar = () => {
         onChange={(e)=>setValSearch(e.target.value)} 
         />
         <hr className=" h-1 rounded-full my-3 mx-2 bg-gray-200 border-0 dark:bg-pink-900"/>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center scrollBar">
         <table className='border-collapse border mx-2  border-pink-900 '>
           <thead>
             <tr>
@@ -106,15 +106,15 @@ const Gestionar = () => {
                 {obj._id === idPass? 
                 <>
                 <td className='  break-words border font-semibold border-pink-100 max-w-xs px-2 bg-white' >
-                  <input className=' border-pink-400 border-2 rounded' type="text" name="nameApp"  value={formData.nameApp} onChange={cambiarValores} />
+                  <input className=' w-32 border-pink-400 border-2 rounded' type="text" name="nameApp"  value={formData.nameApp} onChange={cambiarValores} />
                 </td>
 
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white' >
-                  <input className=' border-pink-400 border-2 rounded' type="text" name="user" value={formData.user} onChange={cambiarValores} />
+                  <input className='w-32 border-pink-400 border-2 rounded' type="text" name="user" value={formData.user} onChange={cambiarValores} />
                 </td>
 
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white' >
-                  <input className=' border-pink-400 border-2 rounded' type="email" name="email" value={formData.email} onChange={cambiarValores} />
+                  <input className='w-auto border-pink-400 border-2 rounded' type="email" name="email" value={formData.email} onChange={cambiarValores} />
                 </td>
 
                 <td className='scrollBar border border-pink-100 max-w-xs px-2 bg-white overflow-auto '>
@@ -139,8 +139,8 @@ const Gestionar = () => {
                 <td className='scrollBar border border-pink-100 max-w-xs px-2 bg-white overflow-auto '>{obj.site}</td>
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white' ><input type="password" disabled className='w-20' value={obj.password} /></td>
                 <td className='  break-words border border-pink-100 max-w-xs px-2 bg-white text-center' >
-                  <button className='p-1 px-3 mx-2 rounded-xl my-1 bg-white text-pink-600 font-bold border-pink-600 border-2  hover:bg-slate-50 disabled:bg-pink-200' onClick={()=>editarDatos(obj._id)} >Editar</button>
-                  <button  className='p-1 px-3 mx-2 rounded-xl my-1 bg-pink-600 border-pink-600 border-2 font-semibold hover:bg-pink-500 text-white' onClick={()=>borrarDato(obj._id)} >Borrar</button>
+                  <button className='p-1 px-3 mx-2 rounded-xl my-1 bg-white text-pink-600 font-bold border-pink-600 border-2  hover:bg-slate-50 disabled:bg-pink-200 flex items-center justify-center' onClick={()=>editarDatos(obj._id)} > <FaRegEdit/> Editar</button>
+                  <button  className='p-1 px-3 mx-2 rounded-xl my-1 bg-pink-600 border-pink-600 border-2 font-semibold hover:bg-pink-500 text-white flex justify-center items-center' onClick={()=>borrarDato(obj._id)} ><FaRegTrashAlt />Borrar</button>
                 </td>
                 </>
                 }

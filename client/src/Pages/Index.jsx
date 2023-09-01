@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import Inicio from '../components/Inicio'
-import Perfil from '../components/Perfil';
 import Gestionar from '../components/Gestionar';
 import Configuracion from '../components/Configuracion';
 import { useAuth } from '../context/AuthContext'
 import { FiLogOut,FiSettings } from "react-icons/fi";
-import { FaChartBar,FaUser} from "react-icons/fa";
+import { FaChartBar,FaCalendarAlt,FaBell} from "react-icons/fa";
 import { FaHouseChimney} from "react-icons/fa6";
 import menuIcon from '../img/menu.png'
+import Recordatorios from '../components/Recordatorios';
+import Fechas from '../components/Fechas';
 const Index = () => {
   const [isOpen, setIsOpen] = useState(true)
   const [indexMenu, setIndexMenu] = useState(0)
@@ -16,7 +17,8 @@ const Index = () => {
   const opciones = [
     {title: "Inicio", icon:FaHouseChimney, component:Inicio},
     {title: "Gestionar",icon:FaChartBar, component:Gestionar},
-    {title: "Perfil",icon:FaUser, component:Perfil},
+    {title: "Recordatorios",icon:FaBell, component:Recordatorios},
+    {title: "Fechas",icon:FaCalendarAlt, component:Fechas},
     {title: "Configuracion",icon:FiSettings, component:Configuracion},
     {title: "Salir",icon:FiLogOut, action:logOut },
   ]
@@ -35,8 +37,8 @@ const Index = () => {
             onClick={()=>setIsOpen(!isOpen)}
           />
           <div className='flex gap-x-4 items-center'>
-            <img src={menuIcon} alt=""
-              className={`cursor-pointer duration-500`}
+            <img src='./src/img/user_icon.jpg' alt=""
+              className={`cursor-pointer w-10 h-10 rounded-full duration-500`}
             />
             <h1 className={`text-white duration-300 font-medium text-xl origin-left ${!isOpen && "scale-0"}`}>{user.username}</h1>
           </div>

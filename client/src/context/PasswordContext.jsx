@@ -15,6 +15,7 @@ export function PassProvider({children}){
     const [objPasswords, setObjPasswords] = useState([])
     const [objPassword, setObjPassword] = useState([])
     const [borrarPass, setBorrarPass] = useState(false)
+    const [cargando, setCargando] = useState(false)
 
     const viewAllPass = async()=>{
         const res = await getAllObjects();
@@ -23,7 +24,9 @@ export function PassProvider({children}){
     } 
     const createNewObjPass = async(data)=>{
         try {
+            setCargando(true)
             const res = await createObject(data)
+            setCargando(false)
             setObjPassword(res.data)
             Swal.fire({
                 position: 'top-end',
@@ -123,6 +126,7 @@ export function PassProvider({children}){
             viewAllPass,
             deleteObj,
             updateObj,
+            cargando,
             borrarPass,
             objPassword,
             objPasswords,
