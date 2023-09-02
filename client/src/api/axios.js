@@ -1,6 +1,6 @@
 import axios from "axios";
 const instancia = axios.create({
-    baseURL:'http://localhost:3000/api',
+    baseURL:'https://gestionbackend-api.up.railway.app/',
     withCredentials:true
 })
 export default instancia

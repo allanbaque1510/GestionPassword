@@ -1,1 +1,1 @@
-export const TOKEN_SECRET = "create secret key";
+export const TOKEN_SECRET = process.env.TOKEN_SECRET || "tokenAllanñ@1";
