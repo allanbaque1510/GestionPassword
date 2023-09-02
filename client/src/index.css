@@ -15,6 +15,15 @@ body{
   text-align: center;
   padding-block: 8px;
 }
+.fondoStitch{
+  background-image: url('./img/stitch.jpg');
+  background-size:contain;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+.sombraBlanca{
+  text-shadow: 1px 1px 0px white, -1px -1px 0px white;
+}
 .boxMessage{
   color: #441e49;
   font-style: oblique;

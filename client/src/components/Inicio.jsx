@@ -94,17 +94,19 @@ const Inicio = () => {
 
                         </span>
                       </div>
-                      <div className=" overflow-auto scrollBar">
+                      <div className="fondoStitch">
+
+                    <div className=" overflow-auto scrollBar">
 
                     <table className='table-fixed mb-2 m-2'>
                       <tbody>
-                      {pass.email.length > 0?<tr className=''><td className='labelPass'>Correo: </td><td className='break-words'>{pass.email}</td></tr>: null } 
-                      {pass.user.length > 0?<tr className=''><td className='labelPass'>Usuario: </td><td className='break-words'>{pass.user}</td></tr>: null } 
-                      {pass.site.length > 0?<tr className=''><td className='labelPass'>URL: </td><td><a href={pass.site.includes('https')?pass.site:"https://"+pass.site}  rel="noopener noreferrer" className=' px-1 p-0.5 font-semibold text-pink-500 rounded underline' target='_blank'>Visitar pagina</a></td></tr>: null } 
+                      {pass.email.length > 0?<tr className=''><td className='labelPass'>Correo: </td><td className='break-words font-bold sombraBlanca'>{pass.email}</td></tr>: null } 
+                      {pass.user.length > 0?<tr className=''><td className='labelPass'>Usuario: </td><td className='break-words font-bold sombraBlanca'>{pass.user}</td></tr>: null } 
+                      {pass.site.length > 0?<tr className=''><td className='labelPass'>URL: </td><td><a href={pass.site.includes('https')?pass.site:"https://"+pass.site}  rel="noopener noreferrer" className=' px-1 p-0.5 font-bold text-pink-500 rounded underline' target='_blank'>Visitar pagina</a></td></tr>: null } 
                       <tr className=''> 
                         <td className='labelPass'>Contraseña:</td> 
                         <td>
-                        <input type="password" name="password-input" id={`password-input${index}`} value={pass.password} disabled />
+                        <input type="password" className='font-bold backdrop-blur-sm rounded-full px-1' name="password-input" id={`password-input${index}`} value={pass.password} disabled />
                         </td>
                       </tr> 
                    
@@ -138,6 +140,7 @@ const Inicio = () => {
                             }
                         </button>
                       </span>
+                      </div>
 
                     
                    </li> 

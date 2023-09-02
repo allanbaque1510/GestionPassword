@@ -17,8 +17,7 @@ const Index = () => {
   const opciones = [
     {title: "Inicio", icon:FaHouseChimney, component:Inicio},
     {title: "Gestionar",icon:FaChartBar, component:Gestionar},
-    {title: "Recordatorios",icon:FaBell, component:Recordatorios},
-    {title: "Fechas",icon:FaCalendarAlt, component:Fechas},
+    {title: "Recordatorios",icon:FaCalendarAlt, component:Recordatorios},
     {title: "Configuracion",icon:FiSettings, component:Configuracion},
     {title: "Salir",icon:FiLogOut, action:logOut },
   ]

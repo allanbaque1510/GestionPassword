@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { getAllObjects,getObject,modifyObject,createObject, deleteObject } from "../api/passwords";
+import { getAllRecords,getRecord,createRecord,modifyRecord,deleteRecord } from "../api/records";
 import Swal from 'sweetalert2'
 const passContext = createContext()
 
@@ -15,12 +16,16 @@ export function PassProvider({children}){
     const [objPasswords, setObjPasswords] = useState([])
     const [objPassword, setObjPassword] = useState([])
     const [borrarPass, setBorrarPass] = useState(false)
+    
     const [cargando, setCargando] = useState(false)
-
+    
+    const [objRecords, setObjRecords] = useState([])
+    const [objRecord, setObjRecord] = useState([])
+    const [borrarRecord, setBorrarRecord] = useState(false)
+    
     const viewAllPass = async()=>{
         const res = await getAllObjects();
         setObjPasswords(res.data)
-      
     } 
     const createNewObjPass = async(data)=>{
         try {
@@ -122,16 +127,136 @@ export function PassProvider({children}){
     }
 
 
+    const viewAllRecord = async()=>{
+        const res = await getAllRecords();
+        
+        setObjRecords(res.data)
+    } 
+    const createNewRecord = async(data)=>{
+        try {
+            setCargando(true)
+            const res = await createRecord(data)
+            setCargando(false)
+            setObjRecord(res.data)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                width:200,
+                text: 'Recordatorio creado exitosamente',
+                showConfirmButton: false,
+                timer: 1500,
+                backdrop:false
+              })
+        } catch (error) {
+            if(error.response.data[0])
+            return Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                width:200,
+                text: error.response.data[0],
+                showConfirmButton: false,
+                timer: 1500,
+                backdrop:false
+            })
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                width:200,
+                text: error.message,
+                showConfirmButton: false,
+                timer: 1500,
+                backdrop:false})
+            
+        }
+
+    }
+    const updateRecord = async(data)=>{
+        try {
+            setCargando(true)
+            const res = await modifyRecord(data)
+            setCargando(false)
+            setObjRecord(res.data)
+            Swal.fire({
+                icon: 'success',
+                title: "Datos actualizados exitosamente",
+                showConfirmButton: false,
+                timer: 1700,
+            })
+            console.log(res)
+        } catch (error) {
+            if(error.response.data[0])
+            return Swal.fire({
+                icon: 'error',
+                title: error.response.data[0],
+                showConfirmButton: false,
+                timer: 1500,
+            })
+            Swal.fire({
+                icon: 'error',
+                title: error.message,
+                showConfirmButton: false,
+                timer: 1500,
+            })
+            
+        }
+    }
+    const deleteRecordatorio = async(data)=>{
+        try {
+            const res = await deleteRecord(data)
+            if(res.status === 204){
+                setBorrarRecord(!borrarPass)
+            }
+            Swal.fire({
+                icon: 'success',
+                title: "Recordatorio eliminado",
+                showConfirmButton: false,
+                timer: 1700,
+            })
+        } catch (error) {
+            if(error.response.data[0])
+            return Swal.fire({
+                icon: 'error',
+                title: error.response.data[0],
+                showConfirmButton: false,
+                timer: 1500,
+            })
+            Swal.fire({
+                icon: 'error',
+                title: error.message,
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        }
+        
+    }
+
+
+
+
+
+
+
+
     return(
         <passContext.Provider value={{
+            cargando,
+
             createNewObjPass,
             viewAllPass,
             deleteObj,
             updateObj,
-            cargando,
             borrarPass,
             objPassword,
             objPasswords,
+
+            viewAllRecord,
+            createNewRecord,
+            updateRecord,
+            deleteRecordatorio,
+            objRecords,
+            objRecord,
+            borrarRecord,
+
         }}>
             {children}
         </passContext.Provider>
