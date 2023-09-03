@@ -9,10 +9,8 @@ import cors from 'cors'
 const app = express();
 
 app.use(cors({
-    origin: 'https://gestion.up.railway.app', // Reemplaza con tu origen específico
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Habilitar credenciales
-    optionsSuccessStatus: 204, 
+    origin:'http://localhost:5173',
+    credentials:true
 }));
 app.use(morgan('dev'));
 app.use(express.json());
